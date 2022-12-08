@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+ <!--  <link rel="stylesheet" href="style.css">  -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot</title>
+</head>
+<body>
+<div class="container">
+    <div class="chatbox">
+        <div class="chatbox__support">
+            <div class="chatbox__header">
+                <div class="chatbox__image--header">
+                <img src="{{ url_for('static', filename='images/main-logo.png') }}" alt="image" styles="height:20px;width:20px;">
+                <!--    <img src="main-logo.png" alt="image" styles="height:20px;width:20px;">  -->
+                </div>
+                <div class="chatbox__content--header">
+                    <h4 class="chatbox__heading--header">Chat support</h4>
+                    <p class="chatbox__description--header">Enter  <br>  1. To search by JobName <br> 2. To search by Abend code  <br> 3. To search by Jobname & Abend code</p>
+                </div>
+            </div>
+            <div class="chatbox__messages" id="messages">
+                <div></div>
+            </div>
+            <div class="chatbox__footer">
+                <input type="text" placeholder="Write a message..." autofocus />
+                <button class="chatbox__send--footer send__button">Send</button>
+            </div>
+        </div>
+        <div class="chatbox__button">
+            <button class="startchatbutton">
+          <img src="{{ url_for('static', filename='images/chatbox-icon.gif') }}" styles="height:20px;width:20px;" /> 
+          <!--    <img src="chatbox-icon.gif" alt="image" styles="height:20px;width:20px;"> -->
+            </button>
+        </div>
+    </div>
+</div>
+
+    <script>
+        $SCRIPT_ROOT = {{ request.script_root|tojson }};
+    </script>
+  <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+   <!--     <script type="text/javascript" src="app.js"></script>   -->
+ 
+      <script>
+        var myVar = {{ data | tojson }}
+        const imgDiv = document.createElement("div");  
+        imgDiv.className = "chat-image--operator";
+        imgDiv.Id = "chatimageid";
+        document.getElementById('messages').appendChild(imgDiv);
+        imgd = document.createElement("img");
+        imgd.setAttribute("src", "static/images/main-logo.png");
+      imgd.setAttribute("width", "25px");
+      imgd.setAttribute("height", "25px");
+      imgDiv.appendChild(imgd);
+       <!-- const imgDiv = document.createElement("div");  -->
+        <!-- imgDiv.className = "chat-image--operator";  -->
+       <!--  imgDiv.Id = "chatimageid";  -->
+        <!-- document.getElementById('messages').appendChild(imgDiv); -->
+         const newDiv = document.createElement("div");
+         newDiv.className = "messages__item messages__item--visitor";
+        newDiv.innerHTML = myVar['start'];
+        <!-- document.getElementById('messages').appendChild(newDiv);  -->
+         imgDiv.appendChild(newDiv);
+        chatbox.messages.push({name: "Bot",message: myVar['start']})
+        
+
+    </script>
+
+</body>
+</html>
